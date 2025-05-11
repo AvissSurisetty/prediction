@@ -10,6 +10,14 @@ import plotly.express as px
 import streamlit as st
 
 from src.inference import fetch_hourly_rides, fetch_predictions
+import os
+import hopsworks
+
+def get_hopsworks_project():
+    api_key = os.getenv("HOPSWORKS_API_KEY")
+    if not api_key:
+        raise ValueError("HOPSWORKS_API_KEY environment variable not set.")
+    return hopsworks.login(api_key=api_key)
 
 st.title("Mean Absolute Error (MAE) by Pickup Hour")
 
